@@ -1,1 +1,58 @@
-
+<!DOCTYPE HTML>
+	<html>
+	<head>
+		<title>Hot and Cold</title>
+		<style></style>
+		<script>
+			function initialize() {
+				document.getElementById("title");
+				numberOutput = document.getElementById("numberOut");
+				num = (Math.random() * 100) + 1;
+				guess = 1;
+			}
+			
+			function guess(type, amount) {
+				if (type == "+") guess += amount;
+				if (type == "-") guess -= amount;
+				if (guess < 1) guess = 1;
+				numberOutput.innerHTML = guess;
+			}
+			
+			function temperature() {
+				let temperature;
+				if (Math.abs(guess - num) <= 5) temperature = "Very Hot";
+				if (Math.abs(guess - num) >= 6 && Math.abs(guess - num) <= 8) temperature = "Hot";
+				if (Math.abs(guess - num) <= 5) temperature = "Very Warm";
+				if (Math.abs(guess - num) <= 5) temperature = "Warm";
+				if (Math.abs(guess - num) <= 5) temperature = "Cool";
+				if (Math.abs(guess - num) <= 5) temperature = "Very Cool";
+				if (Math.abs(guess - num) <= 5) temperature = "Cold";
+				if (Math.abs(guess - num) <= 5) temperature = "Very Cold";
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<div id = "title">
+		<h1>HOT AND COLD</h1>
+		<p><span>In the game of Hot and Cold, the player gets a set number of turns to 
+		“find” a number. As the player guesses, (s)he will be informed 
+		of how close (s)he is to the actual number in terms of hot and cold.</span></p>
+		</div>
+		<hr />
+		
+		<h3 id = "numberOut"></h3>
+		
+		<button onclick = "guess('+','1');">+1</button>
+		<button onclick = "guess('+','5');">+5</button>
+		<button onclick = "guess('+','10');">+10</button>
+		<button onclick = "guess('+','25');">+25</button>
+		<hr />
+		<button onclick = "guess('-','1');">-1</button>
+		<button onclick = "guess('-','5');">-5</button>
+		<button onclick = "guess('-','10');">-10</button>
+		<button onclick = "guess('-','25');">-25</button>
+		
+		<button onclick = "temperature()">commit</button>
+		<button onclick = "">reset</button>
+	</body>
+</html>
