@@ -1,96 +1,122 @@
 <!DOCTYPE HTML>
-	<html>
-	<head>
-		<title>Hot and Cold</title>
-		<style></style>
-		<script>
-			function initialize() {
-				document.getElementById("title");
-				numberOutput = document.getElementById("numberOut");
-				currentGuess = document.getElementById("currentGuess");
-				hotOrCold = document.getElementById("temperature");
-				guess = document.getElementById("guessesRemaining");
-				log = document.getElementById("guessed");
-				guessLog = "Guess Log: ";
-				remainingGuesses = 5;
-				num = (Math.random() * 100) + 1;
-				guess = 50;
-				temp = "";
-			}
-			
-			function guess(type, amount) {
-				if (type == "+") guess += amount;
-				if (type == "-") guess -= amount;
-				if (guess < 1) guess = 1;
-				if (guess > 100) guess = 100;
-				numberOutput.innerHTML = guess;
-			}
-			
-			function guessesRemaining() {
-				if (temp != "Very Hot") remainingGuesses--;
-				if (remainingGuesses > 0) guess.innerHTML = "Guesses Remaining: " + remainingGuesses;
-				else (remainingGuesses = 0) {
-					guess.innerHTML = "Guesses Remaining: " + remainingGuesses;
-					
-				}
-			}
-			
-			function temperature() {
-				if (Math.abs(guess - num) <= 5) temp = "Very Hot";
-				if (Math.abs(guess - num) >= 6 && Math.abs(guess - num) <= 8) temp = "Hot";
-				if (Math.abs(guess - num) >= 9 && Math.abs(guess - num) <= 15) temp = "Very Warm";
-				if (Math.abs(guess - num) >= 16 && Math.abs(guess - num) <= 20) temp = "Warm";
-				if (Math.abs(guess - num) >= 21 && Math.abs(guess - num) <= 30) temp = "Cool";
-				if (Math.abs(guess - num) >= 31 && Math.abs(guess - num) <= 40) temp = "Very Cool";
-				if (Math.abs(guess - num) >= 41 && Math.abs(guess - num) <= 55) temp = "Cold";
-				if (Math.abs(guess - num) > 55) temp = "Very Cold";
-				hotOrCold.innerHTML = "Temperature: " + temp;
-				}
-			}
-			
-			/*function log() {
-				guessLog += guess + ", " + temp + "; ";
-				log.innerHTML = guessLog;
-			}*/
-			
-			function display() {
-				currentGuess.innerHTML = "Current Guess: " + guess;
-				guessesRemaining();
-				temperature();
-				guessLog += guess + ", " + temp + "; ";
-				log.innerHTML = guessLog;
-			}
-		</script>
-	</head>
-	<body onload = "initialize();">
-		<div id = "title">
-		<h1>HOT AND COLD</h1>
-		<p><span>In the game of Hot and Cold, the player gets a set number of turns to 
-		“find” a number. As the player guesses, (s)he will be informed of how close 
-		(s)he is to the actual number in terms of hot and cold. The guess
-		cannot go above 100 or below 1.</span></p>
-		</div>
-		<hr />
-		
-		<h4 id = "guessesRemaining">Guesses Remaining: 5</h4>
-		<h3 id = "numberOut">50</h3>
-		<hr />
-		<h3 id = "currentGuess">Current Guess: </h3>
-		<h3 id = "temperature">Temperature: </h3>
-		<hr />
-		<h5 id = "guessed">Guess Log: </h5>
-		
-		<button onclick = "guess('+','1');">+1</button>
-		<button onclick = "guess('+','5');">+5</button>
-		<button onclick = "guess('+','10');">+10</button>
-		<button onclick = "guess('+','25');">+25</button>
-		<hr />
-		<button onclick = "guess('-','1');">-1</button>
-		<button onclick = "guess('-','5');">-5</button>
-		<button onclick = "guess('-','10');">-10</button>
-		<button onclick = "guess('-','25');">-25</button>
-		
-		<button onclick = "display()">commit</button>
-		<button onclick = "initialize();">reset</button>
-	</body>
+<html>
+    <head>
+        <title>Hot and Cold</title>
+        <style></style>
+        <script>
+            function initialize() {
+                numberOutput = document.getElementById("numberOut");
+                currentGuess = document.getElementById("currentGuess");
+                hotOrCold = document.getElementById("temperature");
+                guessRemain = document.getElementById("guessesRemaining");
+                log = document.getElementById("guessed");
+                num = Math.floor(Math.random() * 100) + 1;
+                guess = 50;
+                temp = "";
+                remainingGuesses = 5;
+                isFakeTemp = false;
+
+                guessRemain.innerHTML = "Guesses Remaining: " + remainingGuesses;
+                numberOutput.innerHTML = guess;
+                currentGuess.innerHTML = "Current Guess: ";
+                hotOrCold.innerHTML = "Temperature: ";
+                guessLog = "Guess Log: ";
+                log.innerHTML = guessLog;
+            }
+
+            function updateGuess(type, amount) {
+                if (type == '+') guess += amount;
+                if (type == '-') guess -= amount;
+                if (guess < 1) guess = 1;
+                if (guess > 100) guess = 100;
+                numberOutput.innerHTML = guess;
+            }
+
+            function guessesRemaining() {
+                if (temp != "Very Hot" && !isFakeTemp) remainingGuesses--;
+                if (remainingGuesses < 0) remainingGuesses = 0;
+                guessRemain.innerHTML = "Guesses Remaining: " + remainingGuesses;
+            }
+
+            function temperature() {
+                const chance = Math.floor(Math.random() * 100) + 1;
+                const trueDiff = Math.abs(guess - num);
+                let diff;
+                if (chance < 6) {
+                    isFakeTemp = true;
+                    diff = Math.floor(Math.random() * 99) + 1;
+                } else {
+                    isFakeTemp = false;
+                    diff = trueDiff;
+                }
+                if (trueDiff == 0) temp = "Correct!";
+                else if (diff <= 5) temp = "Very Hot";
+                else if (diff <= 8) temp = "Hot";
+                else if (diff <= 15) temp = "Very Warm";
+                else if (diff <= 20) temp = "Warm";
+                else if (diff <= 30) temp = "Cool";
+                else if (diff <= 40) temp = "Very Cool";
+                else if (diff <= 55) temp = "Cold";
+                else temp = "Very Cold";
+                hotOrCold.innerHTML = "Temperature: " + temp;
+            }
+
+            function display() {
+                currentGuess.innerHTML = "Current Guess: " + guess;
+                temperature();
+                guessesRemaining();
+                guessLog += guess + " (" + temp + "); ";
+                log.innerHTML = guessLog;
+
+                setTimeout(() => {
+                    if (guess == num) {
+                        alert("Congrats! You guessed the number!");
+                        initialize();
+                    } else if (remainingGuesses <= 0) {
+                        alert("No more guesses remaining! The number was " + num);
+                        initialize();
+                    }
+                }, 100);
+            }
+        </script>
+    </head>
+    <body onload="initialize();">
+        <div id="title">
+            <h1>HOT AND COLD</h1>
+            <ul>
+                <li>5 chances will be given to guess the random number.</li>
+                <li>The guess cannot go above 100 or below 1.</li>
+                <li>Click the commit button to submit the guess.</li>
+                <li>Closeness to the actual number will be measured in degrees
+                    of hotness or coldness.</li>
+                <li>There is a 5% chance that the computer will lie about the temperature.
+                    The computer will not, however, lie about a correct guess.</li>
+                <li>A guess will still be lost if the computer returns a false "Very Hot".</li>
+                <li>The game will reset after it ends.</li>
+                <li>To restart, click reset.</li>
+            </ul>
+        </div>
+        <hr />
+
+        <h4 id="guessesRemaining">Guesses Remaining: 5</h4>
+        <h2 id="numberOut">50</h2>
+        <button onclick="updateGuess('+', 1);">+1</button>
+        <button onclick="updateGuess('+', 5);">+5</button>
+        <button onclick="updateGuess('+', 10);">+10</button>
+        <button onclick="updateGuess('+', 25);">+25</button>
+        <hr />
+        <button onclick="updateGuess('-', 1);">-1</button>
+        <button onclick="updateGuess('-', 5);">-5</button>
+        <button onclick="updateGuess('-', 10);">-10</button>
+        <button onclick="updateGuess('-', 25);">-25</button>
+        <hr />
+        <button onclick="display()">commit</button>
+        <button onclick="initialize();">reset</button>
+
+        <hr />
+        <h4 id="currentGuess">Current Guess: </h4>
+        <h4 id="temperature">Temperature: </h4>
+        <hr />
+        <h5 id="guessed">Guess Log: </h5>
+    </body>
 </html>
