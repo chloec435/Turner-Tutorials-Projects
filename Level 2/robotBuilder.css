@@ -1,0 +1,63 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #00a2ff;
+    background-image: url('images/mainBackground.jpg');
+    background-position: center;
+    background-size: cover;
+    padding: 20px;
+}
+
+h1, h2 {
+    border: 5px double white;
+    border-radius: 2px;
+    text-align: center;
+}
+
+#controlPanel {
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #00ffcc;
+    border: 5px double white;
+    border-radius: 2px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+button {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    background-color:white;
+    border-radius: 2px;
+    border-color: transparent;
+    margin: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+#chassis {
+    text-align: center;
+}
+
+#thumbnails img {
+    width: 80px;
+    height: 100px;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#thumbnails img:hover {
+    border: 2px solid #00a2ff;
+}
+
+#robotImage {
+    border: 2px solid white;
+    border-radius: 2px;
+}

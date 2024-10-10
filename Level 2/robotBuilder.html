@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Robot Designer</title>
+        <link rel="stylesheet" href="robotBuilder.css">
+    </head>
+
+    <body>
+        <h1>ROBOT DESIGNER</h1>
+
+        <div id="controlPanel">
+            <h2>CONTROL PANEL</h2>
+
+            <div>
+                <span>Power Level: <span id="power_level">0</span></span>
+                <button onclick="stats('power', -1)">-</button>
+                <button onclick="stats('power', 1)">+</button>
+                <br />
+
+                <span>Top Speed: <span id="top_speed">0</span></span>
+                <button onclick="stats('speed', -1)">-</button>
+                <button onclick="stats('speed', 1)">+</button>
+                <br />
+
+                <span>Structural Integrity: <span id="structural_integrity">0</span></span>
+                <button onclick="stats('integrity', -1)">-</button>
+                <button onclick="stats('integrity', 1)">+</button>
+                <br />
+
+                <span>Scanners: <span id="_scanners">OFF</span></span>
+                <button onclick="toggle('scanners')">Toggle</button>
+                <br />
+
+                <span>Defensive Systems: <span id="defensive_systems">OFF</span></span>
+                <button onclick="toggle('defensive-systems')">Toggle</button>
+                <br />
+
+                <span>Power Type: <span id="power_type">No Power Installed</span></span>
+                <button onclick="element('hydro')">Hydro</button>
+                <button onclick="element('nuclear')">Nuclear</button>
+                <button onclick="element('solar')">Solar</button>
+            </div>
+
+            <button onclick="finalize()">Finalize</button>
+        </div>
+
+        <div id="chassis">
+
+            <h2>ROBOT CHASSIS</h2>
+            <img id="robotImage" src="images/blank.png" alt="Select Chassis" style="width: 300px; height: auto;"> 
+
+            <div id="thumbnails">
+                <img src="images/robot1.jpg" alt="Robot 1" onclick="changeChassis('images/robot1.jpg')" />
+                <img src="images/robot2.jpg" alt="Robot 2" onclick="changeChassis('images/robot2.jpg')" />
+                <img src="images/robot3.jpg" alt="Robot 3" onclick="changeChassis('images/robot3.jpg')" />
+                <img src="images/robot4.png" alt="Robot 4" onclick="changeChassis('images/robot4.png')" />
+                <img src="images/robot5.jpeg" alt="Robot 5" onclick="changeChassis('images/robot5.jpeg')" />
+            </div>
+
+        </div>
+
+        <script src="robotBuilder.js"></script>
+    </body>
+</html>
