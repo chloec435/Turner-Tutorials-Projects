@@ -19,21 +19,21 @@ function stats(feature, change) {
     if (feature === 'power') {
         let newValue = powerLevel + change;
         powerLevel = newValue < 0 ? 0 
-            : newValue > limit ? (alert(`POWER LEVEL cannot exceed ${limit} for ${powerType.toUpperCase()} power.`), limit) 
+            : newValue > limit ? alert(`POWER LEVEL cannot exceed ${limit} for ${powerType.toUpperCase()} power.`) 
             : newValue;
         document.getElementById('power_level').innerText = powerLevel;
 
     } else if (feature === 'speed') {
         let newValue = topSpeed + change;
         topSpeed = newValue < 0 ? 0 
-            : newValue > limit ? (alert(`TOP SPEED cannot exceed ${limit} for ${powerType.toUpperCase()} power.`), limit) 
+            : newValue > limit ? alert(`TOP SPEED cannot exceed ${limit} for ${powerType.toUpperCase()} power.`)
             : newValue;
         document.getElementById('top_speed').innerText = topSpeed;
 
     } else if (feature === 'integrity') {
         let newValue = structuralIntegrity + change;
         structuralIntegrity = newValue < 0 ? 0 
-            : newValue > limit ? (alert(`STRUCTURAL INTEGRITY cannot exceed ${limit} for ${powerType.toUpperCase()} power.`), limit) 
+            : newValue > limit ? alert(`STRUCTURAL INTEGRITY cannot exceed ${limit} for ${powerType.toUpperCase()} power.`)
             : newValue;
         document.getElementById('structural_integrity').innerText = structuralIntegrity;
     }
