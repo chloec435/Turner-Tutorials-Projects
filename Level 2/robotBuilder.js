@@ -1,4 +1,4 @@
-let powerType = null;
+let powerType = null; let chassis = null;
 let powerLevel = 0, topSpeed = 0, structuralIntegrity = 0;
 let scannersOn = false, defensiveSystemsOn = false;
 
@@ -71,10 +71,15 @@ function powerLimits() {
 }
 
 function changeChassis(image) {
+    chassis = image;
     document.getElementById('robotImage').src = image;
 }
 
 function finalize() {
+    if (!chassis) {
+        alert("Please select a robot chassis first!");
+        return;
+    }
     const controls = document.querySelectorAll('#controlPanel button, #thumbnails img');
     controls.forEach(control => control.style.display = 'none');
 }
